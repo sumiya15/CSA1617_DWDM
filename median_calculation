@@ -1,0 +1,36 @@
+# Given data
+age_intervals <- c("1-5", "5-15", "15-20", "20-50", "50-80", "80-110")
+frequency <- c(200, 450, 300, 1500, 700, 44)
+
+# Compute cumulative frequency
+cumulative_frequency <- cumsum(frequency)
+
+# Total frequency
+N <- sum(frequency)
+
+# Find the median class (where cumulative frequency >= N/2)
+N_by_2 <- N / 2
+median_class_index <- which(cumulative_frequency >= N_by_2)[1]
+
+# Identify the median class
+median_class <- age_intervals[median_class_index]
+median_frequency <- frequency[median_class_index]
+CF_before <- ifelse(median_class_index == 1, 0, cumulative_frequency[median_class_index - 1])
+
+# Extract class boundaries
+class_limits <- strsplit(median_class, "-")[[1]]
+L <- as.numeric(class_limits[1])  # Lower boundary
+U <- as.numeric(class_limits[2])  # Upper boundary
+h <- U - L  # Class width
+
+# Compute the median using the formula
+median_value <- L + ((N_by_2 - CF_before) / median_frequency) * h
+# Print results
+cat("Total Frequency (N):", N, "\n")
+cat("Median Class:", median_class, "\n")
+cat("Lower Boundary (L):", L, "\n")
+cat("Class Width (h):", h, "\n")
+cat("Cumulative Frequency before Median Class (CF):", CF_before, "\n")
+cat("Frequency of Median Class (f):", median_frequency, "\n")
+cat("Computed Median Value:", median_value, "\n")
+
