@@ -1,0 +1,17 @@
+# Load the dataset
+data("mtcars")
+
+# Define X-axis (Car Index)
+car_index <- 1:nrow(mtcars)
+
+# Plot the first line (mpg)
+plot(car_index, mtcars$mpg, type = "l", col = "blue", lwd = 2, 
+     xlab = "Car Index", ylab = "Value", 
+     main = "MPG and QSEC in mtcars Dataset",
+     ylim = range(c(mtcars$mpg, mtcars$qsec)))  
+
+# Add the second line (qsec)
+lines(car_index, mtcars$qsec, type = "l", col = "red", lwd = 2)
+
+# Add legend
+legend("topright", legend = c("MPG", "QSEC"), col = c("blue", "red"), lty = 1, lwd = 2)
