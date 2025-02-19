@@ -1,0 +1,13 @@
+# Sample dataset: Tennis players' scores
+tennis_scores <- c(55, 60, 58, 62, 65, 70, 75, 80, 85, 90, 95, 120, 125, 130, 200)
+
+# Create Boxplot
+boxplot(tennis_scores, 
+        main = "Boxplot of Tennis Players' Scores", 
+        ylab = "Scores", 
+        col = "lightblue", 
+        border = "black", 
+        notch = TRUE)
+
+# Add grid lines
+grid()
