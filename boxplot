@@ -1,0 +1,16 @@
+# Load the dataset
+data("mtcars")
+
+# Convert cyl to a factor (categorical variable)
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+# Create the Boxplot
+boxplot(mpg ~ cyl, data = mtcars, 
+        main = "Boxplot of MPG by Number of Cylinders", 
+        xlab = "Number of Cylinders", 
+        ylab = "Miles Per Gallon (MPG)", 
+        col = c("lightblue", "lightgreen", "lightpink"), 
+        border = "black")
+
+# Add grid lines
+grid()
