@@ -1,0 +1,36 @@
+# Install and Load Required Packages
+install.packages("ggplot2")  # For visualization
+install.packages("dplyr")    # For data manipulation
+library(ggplot2)
+library(dplyr)
+
+# Load the dataset (Make sure "diabetes.csv" is in the working directory)
+diabetes_data <- read.csv("diabetes.csv")
+
+# View first few rows of dataset
+head(diabetes_data)
+
+# Scatter Plot: Blood Pressure vs Age
+ggplot(diabetes_data, aes(x = Age, y = BloodPressure)) +
+  geom_point(color = "blue", alpha = 0.6) +
+  ggtitle("Scatter Plot of Blood Pressure vs Age") +
+  xlab("Age") + 
+  ylab("Blood Pressure") +
+  theme_minimal()
+
+# Group Age into Bins for Bar Chart
+diabetes_data$AgeGroup <- cut(diabetes_data$Age, 
+                              breaks = seq(20, 80, by = 10), 
+                              labels = c("20-30", "30-40", "40-50", "50-60", "60-70", "70-80"))
+
+# Bar Chart: Average Blood Pressure by Age Group
+avg_bp <- diabetes_data %>%
+  group_by(AgeGroup) %>%
+  summarise(AvgBloodPressure = mean(BloodPressure, na.rm = TRUE))
+
+ggplot(avg_bp, aes(x = AgeGroup, y = AvgBloodPressure, fill = AgeGroup)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Average Blood Pressure by Age Group") +
+  xlab("Age Group") + 
+  ylab("Average Blood Pressure") +
+  theme_minimal()
