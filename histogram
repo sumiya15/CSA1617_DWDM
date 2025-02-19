@@ -1,0 +1,20 @@
+# Load the AirPassengers dataset
+data("AirPassengers")
+
+# Convert to numeric values
+passengers <- as.numeric(AirPassengers)
+
+# Define break points (bins)
+breaks <- c(100, seq(200, 700, by = 150))  # Start at 100, bins 150 wide from 200 to 700
+
+# Create histogram
+hist(passengers, 
+     breaks = breaks, 
+     main = "Histogram of AirPassengers Data", 
+     xlab = "Number of Passengers", 
+     ylab = "Frequency", 
+     col = "lightblue", 
+     border = "black")
+
+# Add grid lines
+grid()
